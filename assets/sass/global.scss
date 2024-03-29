@@ -1,0 +1,90 @@
+:root {
+
+    // COULEURS
+    --couleur--rouge: #E00000;
+    --couleur--rouge--secondaire: #FE5858;
+    --couleur--rouge--tertiaire: #FFD6D6;
+
+    --couleur--noir: #000;
+    --couleur--bleu--dark: #313144;
+
+    --couleur--gris--dark: #C4C4C4;
+    --couleur--gris--medium: #D8D8D8;
+    --couleur--gris--light: #E5E5E5;
+
+    // FONTS
+    @font-face {
+        font-family: "Poppins";
+        src: url("./assets/fonts/Poppins/Poppins-Regular.ttf") format("truetype");
+    }
+
+    @font-face {
+        font-family: "Space Mono";
+        src: url("./assets/fonts/Space_Mono/SpaceMono-Regular.ttf") format("truetype");
+    }
+
+    h1,
+    h2,
+    h3,
+    .titre-photo {
+        colot: var(--couleur--noir);
+        font-family: "Space Mono", sans-serif;
+        text-transform: uppercase;
+    }
+
+    h1,
+    h2 {
+        font-style: italic;
+    }
+
+    h1 {
+        font-size: 96px;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    h2 {
+        font-size: 66px;
+        font-weight: 400;
+        line-height: 58px;
+    }
+
+    h3 {
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 1.8px;
+    }
+
+    .titre-photo {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 1.4px;
+    }
+
+    p {
+        font-family: "Poppins", sans-serif;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+        color: var(--couleur--noir);
+    }
+
+
+    /* Styles pour les écrans inférieurs à 375px */
+    @media only screen and (max-width: 375px) {
+        h1 {
+            font-size: 27.588px;
+        }
+
+        h2 {
+            font-size: 46px;
+            font-weight: 400;
+            line-height: 48px;
+        }
+    }
+}

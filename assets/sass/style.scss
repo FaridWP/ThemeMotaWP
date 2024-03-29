@@ -1,0 +1,20 @@
+/*
+Theme Name: Nathalie Mota
+Theme URI: https://wordpress.org/
+Author: Farid Benmebarek
+Author URI: https://wordpress.org/
+Description: Thème custom pour le site photo de Nathalie Mota.
+Requires at least: 5.3
+Tested up to: 6.4
+Requires PHP: 5.6
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: nathaliemota
+Tags: one-column, accessibility-ready, custom-colors, custom-menu, custom-logo, editor-style, featured-images, footer-widgets, block-patterns, rtl-language-support, sticky-post, threaded-comments, translation-ready
+*/
+@import "reset.scss";
+@import "global.scss";
+@import "header.scss";
+@import "footer.scss";
+@import "modal.scss";
