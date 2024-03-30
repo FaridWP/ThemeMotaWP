@@ -12,7 +12,7 @@
 <body <?php body_class(); ?>>
     <header>
         <div class="navbar">
-            <div class="logo">
+            <div class="navbar__logo">
                 <?php
                 if (has_custom_logo()) {
                     the_custom_logo();
@@ -24,8 +24,8 @@
                 ?>
             </div>
 
-            <nav class="menu">
-                <ul class="menu-items">
+            <nav class="navbar__menu">
+                <ul class="navbar__menu__items">
                     <?php wp_nav_menu(array('theme_location' => 'wp_planty_main_menu', 'depth' => 0)); ?>
                 </ul>
             </nav>

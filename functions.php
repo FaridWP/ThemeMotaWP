@@ -11,6 +11,7 @@
 function nathaliemota_style()
 {
 	wp_enqueue_style('nathalie-style', get_stylesheet_directory_uri() . '/style.css');
+	wp_enqueue_style('hamburger', get_stylesheet_uri() . '/assets/dist/hamburgers.css');
 }
 add_action('wp_enqueue_scripts', 'nathaliemota_style');
 
