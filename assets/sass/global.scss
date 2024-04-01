@@ -12,6 +12,8 @@
     --couleur--gris--medium: #D8D8D8;
     --couleur--gris--light: #E5E5E5;
 
+    --couleur--blanc: #FFF;
+
     // FONTS
     @font-face {
         font-family: "Poppins";
@@ -74,7 +76,6 @@
         color: var(--couleur--noir);
     }
 
-
     /* Styles pour les écrans inférieurs à 375px */
     @media only screen and (max-width: 375px) {
         h1 {
@@ -87,4 +88,5 @@
             line-height: 48px;
         }
     }
+
 }

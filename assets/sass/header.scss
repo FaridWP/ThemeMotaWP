@@ -1,0 +1,134 @@
+header {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.navbar {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+
+    &__logo {
+        margin-left: 146px;
+    }
+
+    &__menu {
+        // width: 304px;
+        margin-right: 146px;
+        display: flex;
+        gap: 45px;
+
+        &__mobile {
+            z-index: 999;
+            right: -1000px;
+            display: none;
+            visibility: hidden;
+            width: 100vw;
+            height: calc(100vh - 80px);
+            background-color: var(--couleur--rouge);
+            position: fixed;
+            top: 80px;
+            display: flex;
+            gap: 18px;
+
+            transition: all 0.3s ease-in-out;
+
+
+            &--active {
+                right: 0;
+                visibility: visible;
+            }
+
+            nav {
+                display: flex;
+
+                ul {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    width: 100vw;
+                    height: 100%;
+                    gap: 18px;
+                    text-align: center;
+
+                    a {
+                        color: var(--couleur--blanc);
+                        font-family: "Space Mono";
+                        font-size: 44px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: normal;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+.menu {
+    display: flex;
+    gap: 45px;
+
+    color: var(--couleur--noir);
+    font-family: "Space Mono";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+.hamburger {
+    display: none !important;
+}
+
+
+@media only screen and (max-width: 980px) {
+    .navbar {
+
+        &__logo {}
+
+        &__menu {
+
+            &__items {
+                display: none;
+            }
+
+        }
+    }
+
+    .menu {}
+
+    .hamburger {
+        display: inline-block !important;
+    }
+
+}
+
+@media only screen and (max-width:750px) {
+
+    .navbar {
+
+        &__logo {
+            margin-left: 40px;
+        }
+
+        &__menu {
+            margin-right: 40px;
+        }
+    }
+}
+
+@media only screen and (max-width:500px) {
+
+    .custom-logo-link>img {
+        width: 138px;
+        height: 9px;
+    }
+}

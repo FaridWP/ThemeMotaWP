@@ -77,6 +77,7 @@ td {
   --couleur--gris--dark: #C4C4C4;
   --couleur--gris--medium: #D8D8D8;
   --couleur--gris--light: #E5E5E5;
+  --couleur--blanc: #FFF;
   /* Styles pour les écrans inférieurs à 375px */
 }
 @font-face {
@@ -139,6 +140,107 @@ td {
     font-size: 46px;
     font-weight: 400;
     line-height: 48px;
+  }
+}
+
+header {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.navbar {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+.navbar__logo {
+  margin-left: 146px;
+}
+.navbar__menu {
+  margin-right: 146px;
+  display: flex;
+  gap: 45px;
+}
+.navbar__menu__mobile {
+  z-index: 999;
+  right: -1000px;
+  display: none;
+  visibility: hidden;
+  width: 100vw;
+  height: calc(100vh - 80px);
+  background-color: var(--couleur--rouge);
+  position: fixed;
+  top: 80px;
+  display: flex;
+  gap: 18px;
+  transition: all 0.3s ease-in-out;
+}
+.navbar__menu__mobile--active {
+  right: 0;
+  visibility: visible;
+}
+.navbar__menu__mobile nav {
+  display: flex;
+}
+.navbar__menu__mobile nav ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  height: 100%;
+  gap: 18px;
+  text-align: center;
+}
+.navbar__menu__mobile nav ul a {
+  color: var(--couleur--blanc);
+  font-family: "Space Mono";
+  font-size: 44px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.menu {
+  display: flex;
+  gap: 45px;
+  color: var(--couleur--noir);
+  font-family: "Space Mono";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: none !important;
+}
+
+@media only screen and (max-width: 980px) {
+  .navbar__menu__items {
+    display: none;
+  }
+  .hamburger {
+    display: inline-block !important;
+  }
+}
+@media only screen and (max-width: 750px) {
+  .navbar__logo {
+    margin-left: 40px;
+  }
+  .navbar__menu {
+    margin-right: 40px;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .custom-logo-link > img {
+    width: 138px;
+    height: 9px;
   }
 }
 

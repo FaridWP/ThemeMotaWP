@@ -26,7 +26,19 @@
 
             <nav class="navbar__menu">
                 <ul class="navbar__menu__items">
-                    <?php wp_nav_menu(array('theme_location' => 'wp_planty_main_menu', 'depth' => 0)); ?>
+                    <?php wp_nav_menu(array('theme_location' => 'nathaliemota_menu', 'depth' => 0)); ?>
+                </ul>
+                <button class="hamburger hamburger--squeeze" type="button">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </button>
+            </nav>
+        </div>
+        <div class="navbar__menu__mobile">
+            <nav>
+                <ul>
+                    <?php wp_nav_menu(array('theme_location' => 'nathaliemota_menu', 'depth' => 0)); ?>
                 </ul>
             </nav>
         </div>
