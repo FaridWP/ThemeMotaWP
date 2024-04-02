@@ -44,7 +44,8 @@ function nathaliemota_config()
 
 	register_nav_menus(
 		array(
-			'nathaliemota_menu' => 'Main Menu'
+			'nathaliemota_menu' => 'Main Menu',
+			'footer_menu' => 'Footer Menu',
 		)
 	);
 }
