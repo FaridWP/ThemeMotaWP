@@ -167,7 +167,7 @@ header {
 }
 .navbar__menu__mobile {
   z-index: 999;
-  right: -1000px;
+  right: -2000px;
   display: none;
   visibility: hidden;
   width: 100vw;
@@ -245,8 +245,9 @@ header {
 }
 footer {
   width: 100%;
-  position: absolute;
+  position: fixed;
   bottom: 0;
+  background-color: var(--couleur--blanc);
 }
 
 .footer__menu {
@@ -291,6 +292,22 @@ footer {
     flex-direction: column;
     gap: 24px;
   }
+}
+#modal {
+  display: none;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  z-index: 999;
+}
+.modal__container {
+  width: 597px;
+  height: 769px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,0 +1,19 @@
+#modal {
+    display: none;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    z-index: 999;
+
+    &__container {
+        width: 597px;
+        height: 769px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        // position: absolute;
+    }
+
+}
