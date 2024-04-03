@@ -13,9 +13,9 @@ $(".navbar__menu__mobile")
 
 // MODAL OPEN
 $('a[href="#contact"]').on("click", function () {
-  $(".popup").show()
+  $(".popup").show("fade")
 })
 // MODAL CLOSE
 $("#overlay").on("click", function () {
-  $(".popup").hide()
+  $(".popup").hide("fade")
 })
