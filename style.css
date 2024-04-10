@@ -245,7 +245,7 @@ header {
 }
 footer {
   width: 100%;
-  position: fixed;
+  position: static;
   bottom: 0;
   background-color: var(--couleur--blanc);
 }
@@ -412,6 +412,12 @@ footer {
   .modal__img__xl {
     display: none;
   }
+}
+.prev-post-thumbnail,
+.next-post-thumbnail {
+  position: absolute;
+  max-width: 100px;
+  max-height: 100px;
 }
 
 /*# sourceMappingURL=style.css.map */

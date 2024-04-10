@@ -19,3 +19,25 @@ $('a[href="#contact"]').on("click", function () {
 $("#overlay").on("click", function () {
   $(".popup").hide("fade")
 })
+
+jQuery(document).ready(function ($) {
+  // Fonction pour afficher le thumbnail au survol du lien précédent
+  $(".prev-post-link").hover(
+    function () {
+      $(this).siblings(".prev-post-thumbnail").css("display", "inline-block")
+    },
+    function () {
+      $(this).siblings(".prev-post-thumbnail").css("display", "none")
+    }
+  )
+
+  // Fonction pour afficher le thumbnail au survol du lien suivant
+  $(".next-post-link").hover(
+    function () {
+      $(this).siblings(".next-post-thumbnail").css("display", "inline-block")
+    },
+    function () {
+      $(this).siblings(".next-post-thumbnail").css("display", "none")
+    }
+  )
+})

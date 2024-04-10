@@ -1,50 +1,93 @@
 <?php
+
 /**
- * The template for displaying all single posts
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
- *
- * @package WordPress
- * @subpackage Twenty_Twenty_One
- * @since Twenty Twenty-One 1.0
+ * Template Name: Single Custom Post Template
+ * Template Post Type: photo
  */
 
 get_header();
 
-/* Start the Loop */
-while ( have_posts() ) :
-	the_post();
 
-	get_template_part( 'template-parts/content/content-single' );
+// Récupérer le contenu du champ personnalisé avec ACF
+$type = get_field('type');
+$reference = get_field('reference');
+$annee = get_field('annee');
+$image = get_the_post_thumbnail(get_the_ID(), 'full'); // 'full' récupère la taille d'origine de l'image
 
-	if ( is_attachment() ) {
-		// Parent post navigation.
-		the_post_navigation(
-			array(
-				/* translators: %s: Parent post link. */
-				'prev_text' => sprintf( __( '<span class="meta-nav">Published in</span><span class="post-title">%s</span>', 'twentytwentyone' ), '%title' ),
-			)
-		);
+// Afficher les données récupérées
+if ($type) {
+	echo '<h2>' . esc_html($type) . '</h2>';
+}
+
+if ($reference) {
+	echo '<p>' . esc_html($reference) . '</p>';
+}
+if ($annee) {
+	echo '<p>' . esc_html($annee) . '</p>';
+}
+// Vérifier si l'image mise en avant existe pour le post actuel
+if (has_post_thumbnail()) {
+	// Récupérer l'image mise en avant
+	$image = get_the_post_thumbnail(get_the_ID(), 'full');
+
+	// Afficher l'image mise en avant
+	if ($image) {
+		echo $image;
 	}
+}
 
-	// If comments are open or there is at least one comment, load up the comment template.
-	if ( comments_open() || get_comments_number() ) {
-		comments_template();
-	}
+// Affichage du petit slider photo
+$prev_post = get_previous_post();
+$next_post = get_next_post();
 
-	// Previous/next post navigation.
-	$twentytwentyone_next = is_rtl() ? twenty_twenty_one_get_icon_svg( 'ui', 'arrow_left' ) : twenty_twenty_one_get_icon_svg( 'ui', 'arrow_right' );
-	$twentytwentyone_prev = is_rtl() ? twenty_twenty_one_get_icon_svg( 'ui', 'arrow_right' ) : twenty_twenty_one_get_icon_svg( 'ui', 'arrow_left' );
+if (!empty($prev_post)) {
+	echo '<a href="' . get_permalink($prev_post->ID) . '" class="prev-post-link">Previous</a>';
+	echo '<img src="' . get_the_post_thumbnail_url($prev_post->ID) . '" class="prev-post-thumbnail" style="display: none;">';
+}
 
-	$twentytwentyone_next_label     = esc_html__( 'Next post', 'twentytwentyone' );
-	$twentytwentyone_previous_label = esc_html__( 'Previous post', 'twentytwentyone' );
+if (!empty($next_post)) {
+	echo '<a href="' . get_permalink($next_post->ID) . '" class="next-post-link">Next</a>';
+	echo '<img src="' . get_the_post_thumbnail_url($next_post->ID) . '" class="next-post-thumbnail" style="display: none;">';
+}
 
-	the_post_navigation(
-		array(
-			'next_text' => '<p class="meta-nav">' . $twentytwentyone_next_label . $twentytwentyone_next . '</p><p class="post-title">%title</p>',
-			'prev_text' => '<p class="meta-nav">' . $twentytwentyone_prev . $twentytwentyone_previous_label . '</p><p class="post-title">%title</p>',
-		)
-	);
-endwhile; // End of the loop.
+
+// NE PAS TOUCHER
+// Catégorie du post actuel
+$categories = get_the_category();
+$category = !empty($categories) ? $categories[0]->term_id : '';
+
+// Query pour afficher 2 posts(images) de la catégorie actuelle
+$related_posts_args = array(
+	'post_type' => 'photo',
+	'posts_per_page' => 2,
+	'cat' => $category,
+	'post__not_in' => array(get_the_ID()), // Exclure l'image du post actuel
+	'orderby' => 'rand',
+);
+
+$related_posts_query = new WP_Query($related_posts_args);
+
+// S'il y a des posts semblablent, les afficher
+if ($related_posts_query->have_posts()) :
+?>
+	<div>
+		<h3>VOUS AIMEREZ AUSSI</h3>
+		<ul>
+			<?php while ($related_posts_query->have_posts()) : $related_posts_query->the_post(); ?>
+				<li>
+					<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+					<?php if (has_post_thumbnail()) : ?>
+						<a href="<?php the_permalink(); ?>">
+							<?php the_post_thumbnail('thumbnail'); ?>
+						</a>
+					<?php endif; ?>
+				</li>
+			<?php endwhile; ?>
+		</ul>
+	</div>
+<?php
+	// Reset post data
+	wp_reset_postdata();
+endif;
 
 get_footer();
