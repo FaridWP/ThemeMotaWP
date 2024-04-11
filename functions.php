@@ -159,3 +159,15 @@ function get_post_thumbnail_callback()
 	echo $thumbnail;
 	wp_die();
 }
+
+
+add_filter('posts_orderby', 'custom_orderby', 10, 2);
+
+function custom_orderby($orderby, $query)
+{
+	global $wpdb;
+	if ($query->get('orderby') == 'annee') { // Remplacez 'acf_field' par le nom de votre champ ACF
+		$orderby = "CAST($wpdb->postmeta.meta_value AS DATE) ASC"; // Remplacez ASC par DESC si vous voulez un tri descendant
+	}
+	return $orderby;
+}

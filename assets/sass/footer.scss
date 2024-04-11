@@ -3,6 +3,7 @@ footer {
     position: static;
     bottom: 0;
     background-color: var(--couleur--blanc);
+    z-index: 100;
 }
 
 .footer__menu {

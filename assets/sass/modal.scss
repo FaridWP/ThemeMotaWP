@@ -132,6 +132,11 @@
     cursor: pointer;
 }
 
+.close_modal {
+    z-index: 99;
+    position: absolute;
+    cursor: pointer;
+}
 
 @media only screen and (max-width:290px) {
 

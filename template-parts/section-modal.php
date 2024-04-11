@@ -12,6 +12,9 @@
 <div class="popup">
     <section id="modal" class="modal">
         <div class="modal__container">
+            <div class="close_modal">
+                <h3>✖️</h3>
+            </div>
             <div class="modal__titre">
                 <img class="modal__img__xl" src="<?php echo get_template_directory_uri() . '/assets/images/Contact_header.png' ?>">
                 <img class="modal__img__xs" src="<?php echo get_template_directory_uri() . '/assets/images/Contact_header_mobile.png' ?>">
