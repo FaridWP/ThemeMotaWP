@@ -102,3 +102,19 @@ jQuery(document).ready(function ($) {
     }
   )
 })
+
+// HOVER PHOTO LIGHTBOX
+$(document).ready(function () {
+  $("#overlay__photo").hide() // Initially hide all overlay elements
+
+  $(".overlay__on").each(function () {
+    $(this).hover(
+      function () {
+        $(this).siblings("#overlay__photo").css("display", "flex")
+      },
+      function () {
+        $(this).siblings(".overlay").hide() // Hide the overlay specific to the hovered item
+      }
+    )
+  })
+})

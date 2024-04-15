@@ -163,10 +163,20 @@ get_header();
 
 	// NE PAS TOUCHER
 	// Query pour afficher 2 posts(images) de la catégorie actuelle
+
+	$cats = wp_get_post_terms(get_the_ID(), 'categorie');
+
+
 	$related_posts_args = array(
 		'post_type' => 'photo',
 		'posts_per_page' => 2,
-		'cat' => $terms->name,
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'categorie', // le custom vocabulary des taxonomies
+				'field'    => 'slug',
+				'terms'    => array($cats[0]->slug), // prend le premier slug
+			),
+		),
 		'post__not_in' => array(get_the_ID()), // Exclure l'image du post actuel
 		'orderby' => 'rand',
 	);
@@ -180,11 +190,22 @@ get_header();
 			<h3>VOUS AIMEREZ AUSSI</h3>
 			<ul>
 				<?php while ($related_posts_query->have_posts()) : $related_posts_query->the_post(); ?>
-					<li>
-						<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+					<li class="block__photo__item">
 						<?php if (has_post_thumbnail()) : ?>
-							<a href="<?php the_permalink(); ?>">
-								<?php the_post_thumbnail('thumbnail'); ?>
+							<div id="overlay__photo" class="overlay">
+								<div class="overlay__icon__lightbox">
+									<img src="<?php echo get_stylesheet_directory_uri() . '/assets/images/Icon_fullscreen.png'; ?>">
+								</div>
+								<div class="overlay__icon__eye">
+									<a href="<?php the_permalink(); ?>"><img src="<?php echo get_stylesheet_directory_uri() . '/assets/images/Icon_eye.png'; ?>"></a>
+								</div>
+								<div class="overlay__text">
+									<p class="titre-photo"><?php echo get_field('reference') ?></p>
+									<p class="titre-photo"><?php echo array_shift(get_the_terms(get_the_ID(), 'categorie'))->name ?></p>
+								</div>
+							</div>
+							<a class="overlay__on" href="<?php the_permalink(); ?>">
+								<?php the_post_thumbnail('full'); ?>
 							</a>
 						<?php endif; ?>
 					</li>
@@ -196,6 +217,29 @@ get_header();
 		wp_reset_postdata();
 	endif;
 
+	/*
+	if ($related_posts_query->have_posts()) :
+		?>
+			<section class="container__bottom">
+				<h3>VOUS AIMEREZ AUSSI</h3>
+				<ul>
+					<?php while ($related_posts_query->have_posts()) : $related_posts_query->the_post(); ?>
+						<li>
+							<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+							<?php if (has_post_thumbnail()) : ?>
+								<a href="<?php the_permalink(); ?>">
+									<?php the_post_thumbnail('thumbnail'); ?>
+								</a>
+							<?php endif; ?>
+						</li>
+					<?php endwhile; ?>
+				</ul>
+			</section>
+		<?php
+			// Reset post data
+			wp_reset_postdata();
+		endif;
+*/
 	?>
 </section>
 <?php
