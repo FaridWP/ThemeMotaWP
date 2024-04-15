@@ -103,18 +103,46 @@ jQuery(document).ready(function ($) {
   )
 })
 
-// HOVER PHOTO LIGHTBOX
+// HOVER PHOTO
+// $(document).ready(function () {
+//   $("#overlay__photo").hide()
+
+//   $(".overlay__on").each(function () {
+//     $(this).hover(
+//       function () {
+//         $(this).siblings("#overlay__photo").css("display", "flex")
+//       },
+//       function () {
+//         $(this).siblings(".overlay").css("display", "none")
+//       }
+//     )
+//   })
+// })
+
 $(document).ready(function () {
-  $("#overlay__photo").hide() // Initially hide all overlay elements
+  $("#overlay__photo").hide()
 
   $(".overlay__on").each(function () {
-    $(this).hover(
-      function () {
-        $(this).siblings("#overlay__photo").css("display", "flex")
-      },
-      function () {
-        $(this).siblings(".overlay").hide() // Hide the overlay specific to the hovered item
-      }
-    )
+    var overlay = $(this).siblings("#overlay__photo")
+    var timer
+
+    $(this)
+      .on("mouseenter", function () {
+        clearTimeout(timer)
+        overlay.css("display", "flex")
+      })
+      .on("mouseleave", function () {
+        timer = setTimeout(function () {
+          overlay.css("display", "none")
+        }, 200)
+      })
+
+    overlay
+      .on("mouseenter", function () {
+        clearTimeout(timer)
+      })
+      .on("mouseleave", function () {
+        overlay.css("display", "none")
+      })
   })
 })
