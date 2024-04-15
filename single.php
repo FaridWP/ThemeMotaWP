@@ -143,9 +143,14 @@ get_header();
 			$left_arrow = get_stylesheet_directory_uri() . '/assets/images/left_arrow.png';
 			$right_arrow = get_stylesheet_directory_uri() . '/assets/images/right_arrow.png';
 
-			echo '<button class="left_arrow"><a href="' . get_permalink($prev_post_id) . '" class="prev-post-link"><img class="" src="' . $left_arrow . '"  /></a></button>';
+			if ($prev_post_id) {
+				echo '<button class="left_arrow"><a href="' . get_permalink($prev_post_id) . '" class="prev-post-link"><img class="" src="' . $left_arrow . '"  /></a></button>';
+			}
 			echo '<img src="' . get_the_post_thumbnail_url($prev_post_id) . '" class="prev-post-thumbnail" style="display: none;">';
-			echo '<button class="right_arrow"><a href="' . get_permalink($next_post_id) . '" class="next-post-link"><img class="" src="' . $right_arrow . '"  /></a></button>';
+
+			if ($next_post_id) {
+				echo '<button class="right_arrow"><a href="' . get_permalink($next_post_id) . '" class="next-post-link"><img class="" src="' . $right_arrow . '"  /></a></button>';
+			}
 			echo '<img src="' . get_the_post_thumbnail_url($next_post_id) . '" class="next-post-thumbnail" style="display: none;">';
 
 
