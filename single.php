@@ -96,18 +96,6 @@ get_header();
 			$next_post = get_next_post();
 			$left_arrow = get_stylesheet_directory_uri() . '/assets/images/left_arrow.png';
 			$right_arrow = get_stylesheet_directory_uri() . '/assets/images/right_arrow.png';
-
-
-
-			if (!empty($prev_post)) {
-				echo '<button class="left_arrow"><a href="' . get_permalink($prev_post->ID) . '" class="prev-post-link"><img class="" src="' . $left_arrow . '"  /></a></button>';
-				echo '<img src="' . get_the_post_thumbnail_url($prev_post->ID) . '" class="prev-post-thumbnail" style="display: none;">';
-			}
-
-			if (!empty($next_post)) {
-				echo '<button class="right_arrow"><a href="' . get_permalink($next_post->ID) . '" class="next-post-link"><img class="" src="' . $right_arrow . '"  /></a></button>';
-				echo '<img src="' . get_the_post_thumbnail_url($next_post->ID) . '" class="next-post-thumbnail" style="display: none;">';
-			}
 			*/
 			// Définir les arguments de la requête pour récupérer les articles triés par le champ ACF
 			$args = array(
@@ -181,65 +169,24 @@ get_header();
 		'orderby' => 'rand',
 	);
 
+	// Création de la requête
 	$related_posts_query = new WP_Query($related_posts_args);
+	// Création de la variable pour le template part
+	set_query_var('query_photos', $related_posts_query);
+
 
 	// S'il y a des posts semblablent, les afficher
 	if ($related_posts_query->have_posts()) :
 	?>
 		<section class="container__bottom">
 			<h3>VOUS AIMEREZ AUSSI</h3>
-			<ul>
-				<?php while ($related_posts_query->have_posts()) : $related_posts_query->the_post(); ?>
-					<li class="block__photo__item">
-						<?php if (has_post_thumbnail()) : ?>
-							<div id="overlay__photo" class="overlay">
-								<div class="overlay__icon__lightbox">
-									<img src="<?php echo get_stylesheet_directory_uri() . '/assets/images/Icon_fullscreen.png'; ?>">
-								</div>
-								<div class="overlay__icon__eye">
-									<a href="<?php the_permalink(); ?>"><img src="<?php echo get_stylesheet_directory_uri() . '/assets/images/Icon_eye.png'; ?>"></a>
-								</div>
-								<div class="overlay__text">
-									<p class="titre-photo"><?php echo get_field('reference') ?></p>
-									<p class="titre-photo"><?php echo array_shift(get_the_terms(get_the_ID(), 'categorie'))->name ?></p>
-								</div>
-							</div>
-							<a class="overlay__on" href="<?php the_permalink(); ?>">
-								<?php the_post_thumbnail('full'); ?>
-							</a>
-						<?php endif; ?>
-					</li>
-				<?php endwhile; ?>
-			</ul>
+			<?php echo get_template_part('template-parts/photo', 'block'); ?>
 		</section>
 	<?php
 		// Reset post data
 		wp_reset_postdata();
 	endif;
 
-	/*
-	if ($related_posts_query->have_posts()) :
-		?>
-			<section class="container__bottom">
-				<h3>VOUS AIMEREZ AUSSI</h3>
-				<ul>
-					<?php while ($related_posts_query->have_posts()) : $related_posts_query->the_post(); ?>
-						<li>
-							<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-							<?php if (has_post_thumbnail()) : ?>
-								<a href="<?php the_permalink(); ?>">
-									<?php the_post_thumbnail('thumbnail'); ?>
-								</a>
-							<?php endif; ?>
-						</li>
-					<?php endwhile; ?>
-				</ul>
-			</section>
-		<?php
-			// Reset post data
-			wp_reset_postdata();
-		endif;
-*/
 	?>
 </section>
 <?php

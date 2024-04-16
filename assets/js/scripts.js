@@ -37,6 +37,7 @@ function mettreAJourValeurDansModal() {
   inputModal.value = valeurSurPage
 }
 
+// FLECHES PETIT SLIDER PAGE SINGLE
 jQuery(document).ready(function ($) {
   // Fonction pour afficher le thumbnail au survol du lien précédent
   $(".left_arrow").hover(
@@ -55,70 +56,11 @@ jQuery(document).ready(function ($) {
     },
     function () {
       $(this).siblings(".next-post-thumbnail").css("display", "none")
-    }
-  )
-})
-
-jQuery(document).ready(function ($) {
-  // Fonction pour afficher le thumbnail au survol du lien précédent
-  $(".left_arrow").hover(
-    function () {
-      $(this).siblings(".prev-post-thumbnail").css("display", "inline-block")
-    },
-    function () {
-      $(this).siblings(".prev-post-thumbnail").css("display", "none")
-    }
-  )
-
-  // Fonction pour afficher le thumbnail au survol du lien suivant
-  $(".right_arrow").hover(
-    function () {
-      $(this).siblings(".next-post-thumbnail").css("display", "inline-block")
-    },
-    function () {
-      $(this).siblings(".next-post-thumbnail").css("display", "none")
-    }
-  )
-})
-
-jQuery(document).ready(function ($) {
-  // Fonction pour afficher le thumbnail au survol du lien précédent
-  $(".left_arrow").hover(
-    function () {
-      $(this).find(".prev-thumbnail").css("display", "inline-block")
-    },
-    function () {
-      $(this).find(".prev-thumbnail").css("display", "none")
-    }
-  )
-
-  // Fonction pour afficher le thumbnail au survol du lien suivant
-  $(".right_arrow").hover(
-    function () {
-      $(this).find(".next-thumbnail").css("display", "inline-block")
-    },
-    function () {
-      $(this).find(".next-thumbnail").css("display", "none")
     }
   )
 })
 
 // HOVER PHOTO
-// $(document).ready(function () {
-//   $("#overlay__photo").hide()
-
-//   $(".overlay__on").each(function () {
-//     $(this).hover(
-//       function () {
-//         $(this).siblings("#overlay__photo").css("display", "flex")
-//       },
-//       function () {
-//         $(this).siblings(".overlay").css("display", "none")
-//       }
-//     )
-//   })
-// })
-
 $(document).ready(function () {
   $("#overlay__photo").hide()
 
