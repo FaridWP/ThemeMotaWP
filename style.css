@@ -230,6 +230,12 @@ header {
   line-height: normal;
   text-transform: uppercase;
 }
+.menu a {
+  transition: all 0.5s ease-out;
+}
+.menu a:hover {
+  font-weight: 900;
+}
 
 .hamburger {
   display: none !important;
@@ -308,12 +314,12 @@ footer {
     gap: 24px;
   }
 }
-.hero__header--photo {
+.accueil .hero__header--photo {
   width: 100vw;
   height: calc(100vh - 80px);
   object-fit: cover;
 }
-.hero__header--text {
+.accueil .hero__header--text {
   width: 100%;
   text-align: center;
   position: absolute;
@@ -325,6 +331,101 @@ footer {
   text-stroke: 1px white;
 }
 
+.gallery {
+  padding: 79px 146px;
+}
+.gallery__inputs {
+  display: flex;
+  justify-content: space-between;
+  justify-self: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.gallery__inputs__filters {
+  display: flex;
+  gap: 36px;
+}
+.gallery select {
+  width: 260px;
+  height: 43px;
+  display: flex;
+  padding: 11px 18px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 1.3px solid #B8BBC2;
+  background: var(--couleu--blanc);
+  color: var(--couleur--bleu--dark);
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0.36px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.gallery select:focus {
+  border-color: #215AFF;
+}
+.gallery select option {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  text-transform: none;
+  background-color: var(--couleur--blanc);
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+.gallery select option:hover {
+  background: var(--couleur--rouge);
+  color: var(--couleur--blanc);
+}
+
+@media only screen and (max-width: 1140px) {
+  .gallery {
+    padding: 79px 146px;
+  }
+  .gallery__inputs {
+    display: flex;
+    justify-content: center;
+    justify-self: center;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+  .gallery__inputs__filters {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .gallery select:focus {
+    border-color: #215AFF;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .gallery {
+    padding: 26px 53px;
+  }
+  .gallery__inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .gallery__inputs__filters {
+    display: flex;
+    flex-direction: column;
+  }
+  .gallery select:focus {
+    border-color: #215AFF;
+  }
+}
 .entry-content {
   padding: 200px;
 }

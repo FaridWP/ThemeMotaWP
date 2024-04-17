@@ -28,15 +28,61 @@
 
         endwhile;
     endif;
-
-
     wp_reset_postdata();
-
     ?>
 
+    <div class="gallery">
+        <div class="gallery__inputs">
+            <div class="gallery__inputs__filters">
+                <div class="gallery__inputs__filters--category">
+                    <?php
+                    $categories = array(
+                        'taxonomy' => 'categorie',
+                    );
 
+                    $cats = get_categories($categories);
+                    ?>
+                    <form id="sort-category" action="<?php echo admin_url('admin-ajax.php'); ?>" method="post">
+                        <select name="categorie" id="sort-taxonomy">
+                            <option value="">Catégories</option>
+                            <?php foreach ($cats as $cat) { ?>
+                                <option value="<?php echo $cat->name; ?>"><?php echo $cat->name; ?></option>
+                            <?php } ?>
+                        </select>
+                    </form>
+
+                </div>
+                <div class="gallery__inputs__filters--format">
+                    <?php
+                    $formats = array(
+                        'taxonomy' => 'format',
+                    );
+
+                    $forms = get_categories($formats);
+                    ?>
+
+                    <select name="format">
+                        <option value="">Formats</option>
+                        <?php foreach ($forms as $form) { ?>
+                            <option value="<?php echo $form->name; ?>"><?php echo $form->name; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+            <div class="gallery__inputs__date">
+                <select name="date">
+                    <option value="new">Trier par</option>
+                    <option value="new">à partir des plus récentes</option>
+                    <option value="old">à partir des plus anciennes</option>
+                </select>
+            </div>
+        </div>
+        <div class="gallery__photos"></div>
+    </div>
+    <div id="filtered-posts">
+        <!-- Les posts triés seront affichés ici -->
+    </div>
 </section>
-
 
 <?php
 // if (have_posts()) :

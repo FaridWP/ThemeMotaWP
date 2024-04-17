@@ -12,6 +12,7 @@ function nathaliemota_style()
 {
 	wp_enqueue_style('nathalie-style', get_stylesheet_directory_uri() . '/style.css');
 	wp_enqueue_style('hamburger', get_stylesheet_directory_uri() . '/assets/dist/hamburgers.min.css');
+	wp_enqueue_style('select2CSS', get_stylesheet_directory_uri() . '/assets/dist/select2.min.css');
 }
 add_action('wp_enqueue_scripts', 'nathaliemota_style');
 
@@ -22,13 +23,21 @@ function jqueryCDN()
 }
 add_action('wp_enqueue_scripts', 'jqueryCDN');
 
+// Chargement Select2
+add_action('wp_enqueue_scripts', 'select2_script');
+function select2_script()
+{
+	wp_enqueue_script('select2', get_stylesheet_directory_uri() . '/assets/js/select2.min.js', array('jquery'), '4.0.13', true);
+}
+
 // Chargement Scripts JS
+add_action('wp_enqueue_scripts', 'nathaliemota_script');
 function nathaliemota_script()
 {
-	wp_enqueue_script('mon_script', get_stylesheet_directory_uri() . '/assets/js/scripts.js', array('jquery'), '1.0', true);
+	wp_enqueue_script('mon_script', get_stylesheet_directory_uri() . '/assets/js/script.js', ['jquery'], '6.5.2', true);
 	wp_localize_script('mon_script', 'mon_script_js', array('ajax_url' => admin_url('admin-ajax.php')));
+	// wp_localize_script('mon_script', 'ajaxurl', admin_url('admin-ajax.php'));
 }
-add_action('wp_enqueue_scripts', 'nathaliemota_script');
 
 
 
@@ -133,8 +142,8 @@ add_action('init', 'cptui_register_my_cpts_photo');
 
 function nathaliemota_request_photos()
 {
-	// $args = array('post_type' => 'photo', 'post_per_page' => -1);
-	$query = new WP_Query(['post_type' => 'photo', 'post_per_page' => -1]);
+	$args = array('post_type' => 'photo', 'post_per_page' => -1);
+	$query = new WP_Query($args);
 	if ($query->have_posts()) {
 		$response = $query;
 	} else {
@@ -146,28 +155,3 @@ function nathaliemota_request_photos()
 }
 add_action('wp_ajax_request_photos', 'nathaliemota_request_photos');
 add_action('wp_ajax_nopriv_request_photos', 'nathaliemota_request_photos');
-
-
-
-add_action('wp_ajax_get_post_thumbnail', 'get_post_thumbnail_callback');
-add_action('wp_ajax_nopriv_get_post_thumbnail', 'get_post_thumbnail_callback');
-
-function get_post_thumbnail_callback()
-{
-	$post_id = $_POST['post_id'];
-	$thumbnail = get_the_post_thumbnail($post_id, 'thumbnail');
-	echo $thumbnail;
-	wp_die();
-}
-
-
-add_filter('posts_orderby', 'custom_orderby', 10, 2);
-
-function custom_orderby($orderby, $query)
-{
-	global $wpdb;
-	if ($query->get('orderby') == 'annee') { // Remplacez 'acf_field' par le nom de votre champ ACF
-		$orderby = "CAST($wpdb->postmeta.meta_value AS DATE) ASC"; // Remplacez ASC par DESC si vous voulez un tri descendant
-	}
-	return $orderby;
-}

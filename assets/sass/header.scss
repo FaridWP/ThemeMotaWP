@@ -24,6 +24,7 @@ header {
         display: flex;
         gap: 45px;
 
+
         &__mobile {
             z-index: 999;
             right: -2000px;
@@ -84,6 +85,17 @@ header {
     font-weight: 400;
     line-height: normal;
     text-transform: uppercase;
+
+
+
+    a {
+        transition: all 0.5s ease-out;
+
+        &:hover {
+            font-weight: 900;
+        }
+    }
+
 }
 
 .hamburger {
