@@ -308,6 +308,27 @@ footer {
     gap: 24px;
   }
 }
+.hero__header--photo {
+  width: 100vw;
+  height: calc(100vh - 80px);
+  object-fit: cover;
+}
+.hero__header--text {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: transparent;
+  -webkit-text-stroke: 1px white;
+  text-stroke: 1px white;
+}
+
+.entry-content {
+  padding: 200px;
+}
+
 .popup {
   display: none;
 }
