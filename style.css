@@ -426,6 +426,73 @@ footer {
     border-color: #215AFF;
   }
 }
+@media only screen and (max-width: 600px) {
+  .accueil .hero__header--text {
+    font-size: 40px !important;
+    color: transparent;
+    -webkit-text-stroke: 0.1px white;
+    text-stroke: 0.1px white;
+  }
+}
+.custom-select {
+  width: 260px;
+  height: 43px;
+  position: relative;
+  padding: 11px 18px;
+  border-radius: 8px;
+  border: 1.3px solid #B8BBC2;
+  background: var(--couleu--blanc);
+  color: var(--couleur--bleu--dark);
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0.36px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.selected-option {
+  font-weight: bold;
+  width: calc(100% - 20px);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  z-index: 1;
+}
+
+.option {
+  padding: 8px 12px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.option:hover {
+  color: var(--couleur--blanc);
+  background-color: var(--couleur--rouge);
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+}
+
+.rotation-180 {
+  transform: rotate(180deg);
+}
+
 .entry-content {
   padding: 200px;
 }

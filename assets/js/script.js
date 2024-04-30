@@ -88,3 +88,58 @@ $(document).ready(function () {
       })
   })
 })
+
+// INIT SELECT
+let dropdownCategory = document.getElementById("categorieDropdown")
+let dropdownFormat = document.getElementById("categorieDropdown")
+var dropdownDate = document.getElementById("categorieDropdown")
+// SELECT Catégorie
+function toggleDropdown() {
+  const dropdown = document.getElementById("categorieDropdown")
+  const arrow = document.querySelector(".arrow__cat")
+  dropdown.style.display = dropdown.style.display === "none" ? "block" : "none"
+  arrow.classList.toggle("rotation-180")
+}
+
+function selectOption(option) {
+  var selectedOption = document.querySelector(".selected-option")
+  selectedOption.textContent = option
+  var dropdown = document.getElementById("categorieDropdown")
+  dropdown.style.display = "none"
+
+  toggleDropdown()
+}
+
+// SELECT Format
+function toggleDropdownFormat() {
+  const dropdown = document.getElementById("formatDropdown")
+  const arrow = document.querySelector(".arrow__format")
+  dropdown.style.display = dropdown.style.display === "none" ? "block" : "none"
+  arrow.classList.toggle("rotation-180")
+}
+
+function selectOptionFormat(option) {
+  var selectedOption = document.querySelector(".selected-option-format")
+  selectedOption.textContent = option
+  var dropdown = document.getElementById("formatDropdown")
+  dropdown.style.display = "none"
+
+  toggleDropdownFormat()
+}
+
+// SELECT Date
+function toggleDropdownDate() {
+  const dropdown = document.getElementById("dateDropdown")
+  const arrow = document.querySelector(".arrow__date")
+  dropdown.style.display = dropdown.style.display === "none" ? "block" : "none"
+  arrow.classList.toggle("rotation-180")
+}
+
+function selectOptionDate(option) {
+  var selectedOption = document.querySelector(".selected-option-date")
+  selectedOption.textContent = option
+  var dropdown = document.getElementById("dateDropdown")
+  dropdown.style.display = "none"
+
+  toggleDropdownDate()
+}

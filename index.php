@@ -31,7 +31,7 @@
     wp_reset_postdata();
     ?>
 
-    <div class="gallery">
+    <!-- <div class="gallery">
         <div class="gallery__inputs">
             <div class="gallery__inputs__filters">
                 <div class="gallery__inputs__filters--category">
@@ -78,10 +78,53 @@
             </div>
         </div>
         <div class="gallery__photos"></div>
+    </div> -->
+
+
+    <div class="gallery">
+        <div class="gallery__inputs">
+
+            <div class="gallery__inputs__filters">
+                <div class="custom-select" onclick="toggleDropdown()">
+                    <div class="selected-option">Catégories</div>
+                    <div class="arrow"><?php echo '<img class="arrow__cat" src="' . get_stylesheet_directory_uri() . '/assets/images/chevron-down-s.png' . '">'; ?></div>
+
+                    <div class="dropdown-content" id="categorieDropdown" style="display: none;">
+                        <?php foreach ($cats as $cat) { ?>
+                            <div class="option" onclick="selectOption('<?php echo $cat->name; ?>')"><?php echo $cat->name; ?></div>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="custom-select" onclick="toggleDropdownFormat()">
+                    <div class="selected-option-format">Formats</div>
+                    <div class="arrow"><?php echo '<img class="arrow__format" src="' . get_stylesheet_directory_uri() . '/assets/images/chevron-down-s.png' . '">'; ?></div>
+
+                    <div class="dropdown-content" id="formatDropdown" style="display: none;">
+                        <?php foreach ($forms as $form) { ?>
+                            <div class="option" onclick="selectOptionFormat('<?php echo $form->name; ?>')"><?php echo $form->name; ?></div>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery__inputs__date">
+                <div class="custom-select" onclick="toggleDropdownDate()">
+                    <div class="selected-option-date">Trier par</div>
+                    <div class="arrow"><?php echo '<img class="arrow__date" src="' . get_stylesheet_directory_uri() . '/assets/images/chevron-down-s.png' . '">'; ?></div>
+
+                    <div class="dropdown-content" id="dateDropdown" style="display: none;">
+                        <div class="option" onclick="selectOptionDate('à partir des plus récentes')" value="new">à partir des plus récentes</div>
+                        <div class="option" onclick="selectOptionDate('à partir des plus anciennes')" value="old">à partir des plus anciennes</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="gallery__photos"></div>
     </div>
-    <div id="filtered-posts">
-        <!-- Les posts triés seront affichés ici -->
-    </div>
+
+
+
 </section>
 
 <?php
