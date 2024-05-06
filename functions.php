@@ -23,17 +23,15 @@ function jqueryCDN()
 }
 add_action('wp_enqueue_scripts', 'jqueryCDN');
 
-// Chargement Select2
-add_action('wp_enqueue_scripts', 'select2_script');
-function select2_script()
-{
-	wp_enqueue_script('select2', get_stylesheet_directory_uri() . '/assets/js/select2.min.js', array('jquery'), '4.0.13', true);
-}
+
 
 // Chargement Scripts JS
 add_action('wp_enqueue_scripts', 'nathaliemota_script');
 function nathaliemota_script()
 {
+	if (is_home()) {
+		wp_enqueue_script('script_home', get_stylesheet_directory_uri() . '/assets/js/script-home.js', ['jquery'], '6.5.2', true);
+	}
 	wp_enqueue_script('mon_script', get_stylesheet_directory_uri() . '/assets/js/script.js', ['jquery'], '6.5.2', true);
 	wp_localize_script('mon_script', 'mon_script_js', array('ajax_url' => admin_url('admin-ajax.php')));
 	// wp_localize_script('mon_script', 'ajaxurl', admin_url('admin-ajax.php'));
@@ -155,3 +153,98 @@ function nathaliemota_request_photos()
 }
 add_action('wp_ajax_request_photos', 'nathaliemota_request_photos');
 add_action('wp_ajax_nopriv_request_photos', 'nathaliemota_request_photos');
+
+
+// function nathaliemota_tri_categories()
+// {
+// 	$args = array(
+// 		'post_type' => 'photo',
+// 		'posts_per_page' => 8,
+// 		'orderby' => 'date',
+// 		'order' => 'DESC'
+// 	);
+
+// 	$query = new WP_Query($args);
+
+
+// 	// $query = new WP_Query($args);
+// 	if ($query->have_posts()) {
+// 		$response = $query;
+// 	} else {
+// 		$response = false;
+// 	}
+
+// 	wp_send_json($response);
+// 	wp_die();
+// }
+// add_action('wp_ajax_tri_categories', 'nathaliemota_tri_categories');
+// add_action('wp_ajax_nopriv_tri_categories', 'nathaliemota_tri_categories');
+
+function nathaliemota_tri_categories()
+{
+
+	// if (isset($_POST['sort'])) {
+	// 	$args['orderby'] = $_POST['sort'];
+	// }
+	$args = array(
+		'post_type' => 'photo',
+		// 'orderby' => 'title',
+		'order' => 'ASC',
+		'posts_per_page' => 8
+	);
+
+	$args['tax_query'] = array(
+		array(
+			'taxonomy' => 'categorie',
+			'field'    => 'slug',
+			'terms'    => $_POST['sort'],
+		),
+	);
+
+
+	// Requête triée
+	$posts = new WP_Query($args);
+	// Création de la variable pour le template part
+	set_query_var('query_photos', $posts);
+
+	// Affichage des posts
+	if ($posts->have_posts()) :
+?>
+			<?php echo get_template_part('template-parts/photo', 'block'); ?>
+<?php
+	else :
+		echo 'Aucun post trouvé !';
+	endif;
+
+	wp_die();
+}
+add_action('wp_ajax_tri_categories', 'nathaliemota_tri_categories');
+add_action('wp_ajax_nopriv_tri_categories', 'nathaliemota_tri_categories');
+
+
+
+
+
+// TESTS
+// add_action('wp_enqueue_scripts', 'my_ajax_test_enqueue_scripts');
+// function my_ajax_test_enqueue_scripts()
+// {
+// 	wp_enqueue_script('ajax-test', get_template_directory_uri() . '/assets/js/script.js', array('jquery'), null, true);
+// 	wp_localize_script('ajax-test', 'ajax_test_params', array(
+// 		'ajax_url' => admin_url('admin-ajax.php'),
+// 		'nonce' => wp_create_nonce('ajax-test-nonce')
+// 	));
+// }
+
+// add_action('wp_ajax_my_ajax_test', 'my_ajax_test_callback');
+// add_action('wp_ajax_nopriv_my_ajax_test', 'my_ajax_test_callback');
+
+// function my_ajax_test_callback()
+// {
+// 	check_ajax_referer('ajax-test-nonce', 'security');
+
+// 	// Code de votre test AJAX
+// 	echo "AJAX est reconnu dans WordPress.";
+
+// 	wp_die();
+// }

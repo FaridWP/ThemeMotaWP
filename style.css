@@ -434,6 +434,32 @@ footer {
     text-stroke: 0.1px white;
   }
 }
+.button__home {
+  display: flex;
+  justify-content: center;
+  margin-top: 51px;
+  margin-bottom: 49px;
+}
+.button__home__btn {
+  width: 272px;
+  height: 50px;
+  padding: 8px 15px;
+  font-family: "Space Mono";
+  color: #000;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border-radius: 2px;
+  background: var(--couleur--gris--medium);
+  box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.button__home__btn:hover {
+  background: var(--couleur--gris--dark);
+}
+
 .custom-select {
   width: 260px;
   height: 43px;

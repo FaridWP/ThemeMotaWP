@@ -27,11 +27,18 @@ $(".contact_photo").on("click", function () {
 })
 
 // MISE A JOUR FORMULAIRE CONTACT AVEC REFERENCE
-let valeurSurPage = document.getElementById("reference").innerText
+const referenceElement = document.querySelector("#reference")
+  ? document.querySelector("#reference")
+  : "ref"
+let valeurSurPage, inputModal
+
+if (referenceElement) {
+  valeurSurPage = referenceElement.innerText
+} else {
+  console.warn("Element #reference not found.")
+}
 // Récupérer l'input dans la modal
-let inputModal = document.querySelector(
-  '.modal__form input[name="your-subject"]'
-)
+inputModal = document.querySelector('.modal__form input[name="your-subject"]')
 // Mettre à jour la valeur de l'input lorsque la modal s'ouvre
 function mettreAJourValeurDansModal() {
   inputModal.value = valeurSurPage
@@ -88,58 +95,31 @@ $(document).ready(function () {
       })
   })
 })
+// HOVER PHOTO AJAX
+$(document).ajaxComplete(function () {
+  $("#overlay__photo").hide()
 
-// INIT SELECT
-let dropdownCategory = document.getElementById("categorieDropdown")
-let dropdownFormat = document.getElementById("categorieDropdown")
-var dropdownDate = document.getElementById("categorieDropdown")
-// SELECT Catégorie
-function toggleDropdown() {
-  const dropdown = document.getElementById("categorieDropdown")
-  const arrow = document.querySelector(".arrow__cat")
-  dropdown.style.display = dropdown.style.display === "none" ? "block" : "none"
-  arrow.classList.toggle("rotation-180")
-}
+  $(".overlay__on").each(function () {
+    var overlay = $(this).siblings("#overlay__photo")
+    var timer
 
-function selectOption(option) {
-  var selectedOption = document.querySelector(".selected-option")
-  selectedOption.textContent = option
-  var dropdown = document.getElementById("categorieDropdown")
-  dropdown.style.display = "none"
+    $(this)
+      .on("mouseenter", function () {
+        clearTimeout(timer)
+        overlay.css("display", "flex")
+      })
+      .on("mouseleave", function () {
+        timer = setTimeout(function () {
+          overlay.css("display", "none")
+        }, 200)
+      })
 
-  toggleDropdown()
-}
-
-// SELECT Format
-function toggleDropdownFormat() {
-  const dropdown = document.getElementById("formatDropdown")
-  const arrow = document.querySelector(".arrow__format")
-  dropdown.style.display = dropdown.style.display === "none" ? "block" : "none"
-  arrow.classList.toggle("rotation-180")
-}
-
-function selectOptionFormat(option) {
-  var selectedOption = document.querySelector(".selected-option-format")
-  selectedOption.textContent = option
-  var dropdown = document.getElementById("formatDropdown")
-  dropdown.style.display = "none"
-
-  toggleDropdownFormat()
-}
-
-// SELECT Date
-function toggleDropdownDate() {
-  const dropdown = document.getElementById("dateDropdown")
-  const arrow = document.querySelector(".arrow__date")
-  dropdown.style.display = dropdown.style.display === "none" ? "block" : "none"
-  arrow.classList.toggle("rotation-180")
-}
-
-function selectOptionDate(option) {
-  var selectedOption = document.querySelector(".selected-option-date")
-  selectedOption.textContent = option
-  var dropdown = document.getElementById("dateDropdown")
-  dropdown.style.display = "none"
-
-  toggleDropdownDate()
-}
+    overlay
+      .on("mouseenter", function () {
+        clearTimeout(timer)
+      })
+      .on("mouseleave", function () {
+        overlay.css("display", "none")
+      })
+  })
+})

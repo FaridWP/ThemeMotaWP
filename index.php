@@ -86,12 +86,12 @@
 
             <div class="gallery__inputs__filters">
                 <div class="custom-select" onclick="toggleDropdown()">
-                    <div class="selected-option">Catégories</div>
+                    <div class="selected-option" id="categorie-option">Catégories</div>
                     <div class="arrow"><?php echo '<img class="arrow__cat" src="' . get_stylesheet_directory_uri() . '/assets/images/chevron-down-s.png' . '">'; ?></div>
 
                     <div class="dropdown-content" id="categorieDropdown" style="display: none;">
                         <?php foreach ($cats as $cat) { ?>
-                            <div class="option" onclick="selectOption('<?php echo $cat->name; ?>')"><?php echo $cat->name; ?></div>
+                            <div class="option cat" value="<?php echo $cat->slug; ?>" onclick="selectOption('<?php echo $cat->name; ?>')"><?php echo $cat->name; ?></div>
                         <?php } ?>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
 
                     <div class="dropdown-content" id="formatDropdown" style="display: none;">
                         <?php foreach ($forms as $form) { ?>
-                            <div class="option" onclick="selectOptionFormat('<?php echo $form->name; ?>')"><?php echo $form->name; ?></div>
+                            <div class="option" value="'<?php echo $form->slug; ?>'" onclick="selectOptionFormat('<?php echo $form->name; ?>')"><?php echo $form->name; ?></div>
                         <?php } ?>
                     </div>
                 </div>
@@ -120,7 +120,43 @@
             </div>
 
         </div>
-        <div class="gallery__photos"></div>
+
+    </div>
+
+    <div class="gallery__photos">
+
+
+        <?php
+
+        $related_posts_args = array(
+            'post_type' => 'photo',
+            'posts_per_page' => 8,
+            'orderby' => 'date',
+            'order' => 'DESC'
+        );
+
+        // Création de la requête
+        $related_posts_query = new WP_Query($related_posts_args);
+        // Création de la variable pour le template part
+        set_query_var('query_photos', $related_posts_query);
+
+
+        // S'il y a des posts semblablent, les afficher
+        if ($related_posts_query->have_posts()) :
+        ?>
+            <section class="container__bottom">
+                <?php echo get_template_part('template-parts/photo', 'block'); ?>
+            </section>
+
+        <?php
+            // Reset post data
+            wp_reset_postdata();
+        endif;
+
+        ?>
+        <div class="button__home">
+            <button class="button__home__btn">Charger plus</button>
+        </div>
     </div>
 
 
