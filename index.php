@@ -101,7 +101,7 @@
 
                     <div class="dropdown-content" id="formatDropdown" style="display: none;">
                         <?php foreach ($forms as $form) { ?>
-                            <div class="option" value="'<?php echo $form->slug; ?>'" onclick="selectOptionFormat('<?php echo $form->name; ?>')"><?php echo $form->name; ?></div>
+                            <div class="option format" value="'<?php echo $form->slug; ?>'" onclick="selectOptionFormat('<?php echo $form->name; ?>')"><?php echo $form->name; ?></div>
                         <?php } ?>
                     </div>
                 </div>
@@ -113,8 +113,8 @@
                     <div class="arrow"><?php echo '<img class="arrow__date" src="' . get_stylesheet_directory_uri() . '/assets/images/chevron-down-s.png' . '">'; ?></div>
 
                     <div class="dropdown-content" id="dateDropdown" style="display: none;">
-                        <div class="option" onclick="selectOptionDate('à partir des plus récentes')" value="new">à partir des plus récentes</div>
-                        <div class="option" onclick="selectOptionDate('à partir des plus anciennes')" value="old">à partir des plus anciennes</div>
+                        <div class="option date" onclick="selectOptionDate('à partir des plus récentes')" value="new">à partir des plus récentes</div>
+                        <div class="option date" onclick="selectOptionDate('à partir des plus anciennes')" value="old">à partir des plus anciennes</div>
                     </div>
                 </div>
             </div>

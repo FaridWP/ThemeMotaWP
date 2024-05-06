@@ -138,6 +138,7 @@ function cptui_register_my_cpts_photo()
 add_action('init', 'cptui_register_my_cpts_photo');
 
 
+// Ajax Base
 function nathaliemota_request_photos()
 {
 	$args = array('post_type' => 'photo', 'post_per_page' => -1);
@@ -155,40 +156,12 @@ add_action('wp_ajax_request_photos', 'nathaliemota_request_photos');
 add_action('wp_ajax_nopriv_request_photos', 'nathaliemota_request_photos');
 
 
-// function nathaliemota_tri_categories()
-// {
-// 	$args = array(
-// 		'post_type' => 'photo',
-// 		'posts_per_page' => 8,
-// 		'orderby' => 'date',
-// 		'order' => 'DESC'
-// 	);
-
-// 	$query = new WP_Query($args);
-
-
-// 	// $query = new WP_Query($args);
-// 	if ($query->have_posts()) {
-// 		$response = $query;
-// 	} else {
-// 		$response = false;
-// 	}
-
-// 	wp_send_json($response);
-// 	wp_die();
-// }
-// add_action('wp_ajax_tri_categories', 'nathaliemota_tri_categories');
-// add_action('wp_ajax_nopriv_tri_categories', 'nathaliemota_tri_categories');
-
+// Ajax Tri par Catégorie
 function nathaliemota_tri_categories()
 {
 
-	// if (isset($_POST['sort'])) {
-	// 	$args['orderby'] = $_POST['sort'];
-	// }
 	$args = array(
 		'post_type' => 'photo',
-		// 'orderby' => 'title',
 		'order' => 'ASC',
 		'posts_per_page' => 8
 	);
@@ -220,6 +193,75 @@ function nathaliemota_tri_categories()
 }
 add_action('wp_ajax_tri_categories', 'nathaliemota_tri_categories');
 add_action('wp_ajax_nopriv_tri_categories', 'nathaliemota_tri_categories');
+
+// Ajax Tri par Format
+function nathaliemota_tri_format()
+{
+
+	$args = array(
+		'post_type' => 'photo',
+		'order' => 'ASC',
+		'posts_per_page' => 8
+	);
+
+	$args['tax_query'] = array(
+		array(
+			'taxonomy' => 'format',
+			'field'    => 'slug',
+			'terms'    => $_POST['sort'],
+		),
+	);
+
+
+	// Requête triée
+	$posts = new WP_Query($args);
+	// Création de la variable pour le template part
+	set_query_var('query_photos', $posts);
+
+	// Affichage des posts
+	if ($posts->have_posts()) :
+?>
+			<?php echo get_template_part('template-parts/photo', 'block'); ?>
+<?php
+	else :
+		echo 'Aucun post trouvé !';
+	endif;
+
+	wp_die();
+}
+add_action('wp_ajax_tri_format', 'nathaliemota_tri_format');
+add_action('wp_ajax_nopriv_tri_format', 'nathaliemota_tri_format');
+
+// Ajax Tri par Date
+function nathaliemota_tri_date()
+{
+
+	$args = array(
+		'post_type' => 'photo',
+		// 'order' => 'ASC',
+		'order' => $_POST['sort'],
+		'posts_per_page' => 8
+	);
+
+
+	// Requête triée
+	$posts = new WP_Query($args);
+	// Création de la variable pour le template part
+	set_query_var('query_photos', $posts);
+
+	// Affichage des posts
+	if ($posts->have_posts()) :
+?>
+			<?php echo get_template_part('template-parts/photo', 'block'); ?>
+<?php
+	else :
+		echo 'Aucun post trouvé !';
+	endif;
+
+	wp_die();
+}
+add_action('wp_ajax_tri_date', 'nathaliemota_tri_date');
+add_action('wp_ajax_nopriv_tri_date', 'nathaliemota_tri_date');
 
 
 
