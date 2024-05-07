@@ -133,6 +133,8 @@
         display: flex;
         flex-direction: column;
         width: 100%;
+        height: 100%;
+        padding-bottom: 20px;
         justify-content: center;
 
         h3 {
@@ -164,8 +166,6 @@
 
     }
 }
-
-.block__photo__item {}
 
 .overlay {
     z-index: 999;

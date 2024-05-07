@@ -182,9 +182,16 @@ function nathaliemota_tri_categories()
 
 	// Affichage des posts
 	if ($posts->have_posts()) :
-?>
-			<?php echo get_template_part('template-parts/photo', 'block'); ?>
-<?php
+
+		echo get_template_part('template-parts/photo', 'block');
+
+		if ($posts->found_posts >= 8) :
+			// Affichage du bouton
+			echo '<div class="button__home">
+            <button class="button__home__btn">Charger plus</button>
+        </div>';
+		endif;
+
 	else :
 		echo 'Aucun post trouvé !';
 	endif;
@@ -220,9 +227,16 @@ function nathaliemota_tri_format()
 
 	// Affichage des posts
 	if ($posts->have_posts()) :
-?>
-			<?php echo get_template_part('template-parts/photo', 'block'); ?>
-<?php
+
+		echo get_template_part('template-parts/photo', 'block');
+
+		if ($posts->found_posts >= 8) :
+			// Affichage du bouton
+			echo '<div class="button__home">
+            <button class="button__home__btn">Charger plus</button>
+        </div>';
+		endif;
+
 	else :
 		echo 'Aucun post trouvé !';
 	endif;
@@ -233,12 +247,12 @@ add_action('wp_ajax_tri_format', 'nathaliemota_tri_format');
 add_action('wp_ajax_nopriv_tri_format', 'nathaliemota_tri_format');
 
 // Ajax Tri par Date
+/*
 function nathaliemota_tri_date()
 {
 
 	$args = array(
 		'post_type' => 'photo',
-		// 'order' => 'ASC',
 		'order' => $_POST['sort'],
 		'posts_per_page' => 8
 	);
@@ -251,9 +265,55 @@ function nathaliemota_tri_date()
 
 	// Affichage des posts
 	if ($posts->have_posts()) :
-?>
-			<?php echo get_template_part('template-parts/photo', 'block'); ?>
-<?php
+
+		echo get_template_part('template-parts/photo', 'block');
+
+		if ($posts->found_posts >= 8) :
+			// Affichage du bouton
+			echo '<div class="button__home">
+            <button class="button__home__btn">Charger plus</button>
+        </div>';
+		endif;
+
+
+	else :
+		echo 'Aucun post trouvé !';
+	endif;
+
+	wp_die();
+}
+add_action('wp_ajax_tri_date', 'nathaliemota_tri_date');
+add_action('wp_ajax_nopriv_tri_date', 'nathaliemota_tri_date');
+*/
+
+function nathaliemota_tri_date()
+{
+	$order = $_POST['sort'];
+
+	$args = array(
+		'post_type' => 'photo',
+		'order' => $_POST['sort'],
+		'posts_per_page' => $_POST['posts_per_page']
+	);
+
+
+	// Requête triée
+	$posts = new WP_Query($args);
+	// Création de la variable pour le template part
+	set_query_var('query_photos', $posts);
+
+	// Affichage des posts
+	if ($posts->have_posts()) :
+
+		echo get_template_part('template-parts/photo', 'block');
+
+		if ($posts->found_posts >= 8) :
+			// Affichage du bouton
+			echo '<div class="button__home">
+            <button class="button__home__btn"  data-order="' . $order . '" onclick="loadMore(this.dataset.order)">Charger plus</button>
+        </div>';
+		endif;
+		wp_reset_postdata();
 	else :
 		echo 'Aucun post trouvé !';
 	endif;

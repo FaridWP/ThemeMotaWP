@@ -145,7 +145,14 @@
         if ($related_posts_query->have_posts()) :
         ?>
             <section class="container__bottom">
-                <?php echo get_template_part('template-parts/photo', 'block'); ?>
+                <?php echo get_template_part('template-parts/photo', 'block');
+                if ($related_posts_query->found_posts >= 8) :
+                    // Affichage du bouton
+                    echo '<div class="button__home">
+            <button class="button__home__btn">Charger plus</button>
+        </div>';
+                endif;
+                ?>
             </section>
 
         <?php
@@ -154,23 +161,12 @@
         endif;
 
         ?>
-        <div class="button__home">
-            <button class="button__home__btn">Charger plus</button>
-        </div>
+
     </div>
 
 
 
 </section>
 
-<?php
-// if (have_posts()) :
-//     while (have_posts()) : the_post();
-
-//         get_template_part('content-page', get_post_format());
-
-//     endwhile;
-// endif;
-?>
 
 <?php get_footer(); ?>
