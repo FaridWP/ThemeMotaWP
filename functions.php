@@ -247,14 +247,14 @@ add_action('wp_ajax_tri_format', 'nathaliemota_tri_format');
 add_action('wp_ajax_nopriv_tri_format', 'nathaliemota_tri_format');
 
 // Ajax Tri par Date
-/*
 function nathaliemota_tri_date()
 {
+	$order = $_POST['sort'];
 
 	$args = array(
 		'post_type' => 'photo',
 		'order' => $_POST['sort'],
-		'posts_per_page' => 8
+		'posts_per_page' => $_POST['posts_per_page']
 	);
 
 
@@ -271,11 +271,10 @@ function nathaliemota_tri_date()
 		if ($posts->found_posts >= 8) :
 			// Affichage du bouton
 			echo '<div class="button__home">
-            <button class="button__home__btn">Charger plus</button>
+            <button class="button__home__btn"  data-order="' . $order . '" onclick="loadMoreDate(this.dataset.order)">Charger plus</button>
         </div>';
 		endif;
-
-
+		wp_reset_postdata();
 	else :
 		echo 'Aucun post trouvé !';
 	endif;
@@ -284,9 +283,10 @@ function nathaliemota_tri_date()
 }
 add_action('wp_ajax_tri_date', 'nathaliemota_tri_date');
 add_action('wp_ajax_nopriv_tri_date', 'nathaliemota_tri_date');
-*/
 
-function nathaliemota_tri_date()
+
+// Ajax Tri Accueil
+function nathaliemota_tri_home()
 {
 	$order = $_POST['sort'];
 
@@ -320,11 +320,8 @@ function nathaliemota_tri_date()
 
 	wp_die();
 }
-add_action('wp_ajax_tri_date', 'nathaliemota_tri_date');
-add_action('wp_ajax_nopriv_tri_date', 'nathaliemota_tri_date');
-
-
-
+add_action('wp_ajax_tri_home', 'nathaliemota_tri_home');
+add_action('wp_ajax_nopriv_tri_home', 'nathaliemota_tri_home');
 
 
 // TESTS

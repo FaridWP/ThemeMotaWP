@@ -146,12 +146,10 @@
         ?>
             <section class="container__bottom">
                 <?php echo get_template_part('template-parts/photo', 'block');
-                if ($related_posts_query->found_posts >= 8) :
-                    // Affichage du bouton
-                    echo '<div class="button__home">
-            <button class="button__home__btn">Charger plus</button>
+                // Affichage du bouton
+                echo '<div class="button__home">
+            <button class="button__home__btn" data-order="' . $order . '" onclick="loadMoreHome(this.dataset.order)">Charger plus</button>
         </div>';
-                endif;
                 ?>
             </section>
 

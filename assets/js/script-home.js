@@ -246,7 +246,7 @@ jQuery(document).ready(function ($) {
   })
 })
 
-function loadMore(sort) {
+function loadMoreDate(sort) {
   $.ajax({
     url: mon_script_js.ajax_url,
     type: "POST",
@@ -257,6 +257,23 @@ function loadMore(sort) {
     },
     success: function (response) {
       $(".container__bottom").html(response)
+      $(".button__home__btn").hide()
+    },
+  })
+}
+
+function loadMoreHome(sort) {
+  $.ajax({
+    url: mon_script_js.ajax_url,
+    type: "POST",
+    data: {
+      action: "tri_home",
+      sort: sort,
+      posts_per_page: -1,
+    },
+    success: function (response) {
+      $(".container__bottom").html(response)
+      $(".button__home__btn").hide()
     },
   })
 }
