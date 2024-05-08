@@ -12,7 +12,6 @@ function nathaliemota_style()
 {
 	wp_enqueue_style('nathalie-style', get_stylesheet_directory_uri() . '/style.css');
 	wp_enqueue_style('hamburger', get_stylesheet_directory_uri() . '/assets/dist/hamburgers.min.css');
-	wp_enqueue_style('select2CSS', get_stylesheet_directory_uri() . '/assets/dist/select2.min.css');
 }
 add_action('wp_enqueue_scripts', 'nathaliemota_style');
 
@@ -34,7 +33,6 @@ function nathaliemota_script()
 	}
 	wp_enqueue_script('mon_script', get_stylesheet_directory_uri() . '/assets/js/script.js', ['jquery'], '6.5.2', true);
 	wp_localize_script('mon_script', 'mon_script_js', array('ajax_url' => admin_url('admin-ajax.php')));
-	// wp_localize_script('mon_script', 'ajaxurl', admin_url('admin-ajax.php'));
 }
 
 
@@ -160,17 +158,18 @@ add_action('wp_ajax_nopriv_request_photos', 'nathaliemota_request_photos');
 function nathaliemota_tri_categories()
 {
 
+	$order = $_POST['sort'];
 	$args = array(
 		'post_type' => 'photo',
 		'order' => 'ASC',
-		'posts_per_page' => 8
+		'posts_per_page' => $_POST['posts_per_page']
 	);
 
 	$args['tax_query'] = array(
 		array(
 			'taxonomy' => 'categorie',
 			'field'    => 'slug',
-			'terms'    => $_POST['sort'],
+			'terms'    => $order,
 		),
 	);
 
@@ -188,7 +187,7 @@ function nathaliemota_tri_categories()
 		if ($posts->found_posts >= 8) :
 			// Affichage du bouton
 			echo '<div class="button__home">
-            <button class="button__home__btn">Charger plus</button>
+            <button class="button__home__btn" data-order="' . $order . '" onclick="loadMoreCat(this.dataset.order)">Charger plus</button>
         </div>';
 		endif;
 
@@ -204,18 +203,19 @@ add_action('wp_ajax_nopriv_tri_categories', 'nathaliemota_tri_categories');
 // Ajax Tri par Format
 function nathaliemota_tri_format()
 {
+	$order = $_POST['sort'];
 
 	$args = array(
 		'post_type' => 'photo',
 		'order' => 'ASC',
-		'posts_per_page' => 8
+		'posts_per_page' => $_POST['posts_per_page']
 	);
 
 	$args['tax_query'] = array(
 		array(
 			'taxonomy' => 'format',
 			'field'    => 'slug',
-			'terms'    => $_POST['sort'],
+			'terms'    => $order,
 		),
 	);
 
@@ -233,7 +233,7 @@ function nathaliemota_tri_format()
 		if ($posts->found_posts >= 8) :
 			// Affichage du bouton
 			echo '<div class="button__home">
-            <button class="button__home__btn">Charger plus</button>
+            <button class="button__home__btn" data-order="' . $order . '" onclick="loadMoreFormat(this.dataset.order)">Charger plus</button>
         </div>';
 		endif;
 

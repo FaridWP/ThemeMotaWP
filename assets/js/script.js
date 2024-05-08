@@ -17,7 +17,7 @@ $('a[href="#contact"]').on("click", function () {
 })
 
 // MODAL CLOSE
-$(".close_modal").on("click", function () {
+$("#overlay").on("click", function () {
   $(".popup").hide("fade")
 })
 // MODAL OPEN Référence

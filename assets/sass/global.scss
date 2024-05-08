@@ -77,6 +77,18 @@
         margin: 0;
     }
 
+    /* Styles pour les écrans inférieurs à 375px */
+    @media only screen and (max-width: 600px) {
+        h1 {
+            font-size: 27.588px;
+        }
+
+        h2 {
+            font-size: 46px;
+            font-weight: 400;
+            line-height: 48px;
+        }
+    }
 
     /* Styles pour les écrans inférieurs à 375px */
     @media only screen and (max-width: 375px) {

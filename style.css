@@ -91,6 +91,7 @@ img {
   --couleur--gris--light: #E5E5E5;
   --couleur--blanc: #FFF;
   /* Styles pour les écrans inférieurs à 375px */
+  /* Styles pour les écrans inférieurs à 375px */
 }
 @font-face {
   font-family: "Poppins";
@@ -144,6 +145,16 @@ img {
   line-height: normal;
   color: var(--couleur--noir);
   margin: 0;
+}
+@media only screen and (max-width: 600px) {
+  :root h1 {
+    font-size: 27.588px;
+  }
+  :root h2 {
+    font-size: 46px;
+    font-weight: 400;
+    line-height: 48px;
+  }
 }
 @media only screen and (max-width: 375px) {
   :root h1 {
@@ -345,46 +356,6 @@ footer {
   display: flex;
   gap: 36px;
 }
-.gallery select {
-  width: 260px;
-  height: 43px;
-  display: flex;
-  padding: 11px 18px;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  justify-content: space-between;
-  align-items: center;
-  align-self: stretch;
-  border-radius: 8px;
-  border: 1.3px solid #B8BBC2;
-  background: var(--couleu--blanc);
-  color: var(--couleur--bleu--dark);
-  font-family: Poppins;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 18px;
-  letter-spacing: 0.36px;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-.gallery select:focus {
-  border-color: #215AFF;
-}
-.gallery select option {
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 18px;
-  text-transform: none;
-  background-color: var(--couleur--blanc);
-  text-transform: capitalize;
-  cursor: pointer;
-  transition: all 0.5s ease-in-out;
-}
-.gallery select option:hover {
-  background: var(--couleur--rouge);
-  color: var(--couleur--blanc);
-}
 
 @media only screen and (max-width: 1140px) {
   .gallery {
@@ -402,9 +373,6 @@ footer {
     flex-direction: column;
     gap: 8px;
   }
-  .gallery select:focus {
-    border-color: #215AFF;
-  }
 }
 @media only screen and (max-width: 1000px) {
   .gallery {
@@ -421,9 +389,6 @@ footer {
   .gallery__inputs__filters {
     display: flex;
     flex-direction: column;
-  }
-  .gallery select:focus {
-    border-color: #215AFF;
   }
 }
 @media only screen and (max-width: 600px) {
@@ -500,7 +465,7 @@ footer {
 
 .option {
   padding: 8px 12px;
-  transition: all 0.2s ease;
+  transition: all 0.4s ease-in-out;
   cursor: pointer;
 }
 .option:hover {
@@ -520,9 +485,14 @@ footer {
 }
 
 .entry-content {
-  padding: 200px;
+  padding: 50px;
 }
 
+@media screen and (max-width: 700px) {
+  .entry-content {
+    padding: 20px;
+  }
+}
 .popup {
   display: none;
 }
@@ -530,6 +500,7 @@ footer {
 #modal {
   display: grid;
   width: 100%;
+  z-index: 999;
 }
 
 .modal {
@@ -547,6 +518,7 @@ footer {
   position: fixed;
   top: 80px;
   background-color: #FFF;
+  z-index: 999;
 }
 .modal__titre {
   margin-top: 18px;
@@ -626,12 +598,12 @@ footer {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
-  z-index: -9;
+  z-index: 100;
   cursor: pointer;
 }
 
@@ -791,6 +763,7 @@ footer {
   position: absolute;
   flex-direction: column;
   justify-content: space-between;
+  animation: fadein 1s normal;
   background: rgba(0, 0, 0, 0.6);
 }
 .overlay__icon__lightbox {

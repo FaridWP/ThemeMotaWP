@@ -45,54 +45,7 @@
         }
     }
 
-    select {
-        width: 260px;
-        height: 43px;
-        display: flex;
-        padding: 11px 18px;
-        margin-top: 8px;
-        margin-bottom: 8px;
-        justify-content: space-between;
-        align-items: center;
-        align-self: stretch;
 
-        border-radius: 8px;
-        border: 1.3px solid #B8BBC2;
-        background: var(--couleu--blanc);
-
-        color: var(--couleur--bleu--dark);
-        font-family: Poppins;
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 18px;
-        letter-spacing: 0.36px;
-        text-transform: uppercase;
-
-        cursor: pointer;
-
-        &:focus {
-            border-color: #215AFF;
-        }
-
-
-        option {
-            font-size: 12px;
-            font-weight: 500;
-            line-height: 18px;
-            text-transform: none;
-            background-color: var(--couleur--blanc);
-            text-transform: capitalize;
-            cursor: pointer;
-            transition: all 0.5s ease-in-out;
-
-            &:hover {
-                background: var(--couleur--rouge);
-                color: var(--couleur--blanc);
-            }
-        }
-
-    }
 
 
 }
@@ -116,19 +69,6 @@
             }
         }
 
-        select {
-
-
-            &:focus {
-                border-color: #215AFF;
-            }
-
-
-            option {}
-
-        }
-
-
     }
 }
 
@@ -150,19 +90,6 @@
                 flex-direction: column;
             }
         }
-
-        select {
-
-
-            &:focus {
-                border-color: #215AFF;
-            }
-
-
-            option {}
-
-        }
-
 
     }
 }
@@ -276,7 +203,7 @@
 
 .option {
     padding: 8px 12px;
-    transition: all 0.2s ease;
+    transition: all 0.4s ease-in-out;
     cursor: pointer;
 
     &:hover {

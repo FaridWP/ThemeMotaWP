@@ -4,7 +4,7 @@
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <link rel="profile" href="https://gmpg.org/xfn/11">
-
+    <title>Nathalie Mota</title>
     <?php wp_head(); ?>
 
 </head>

@@ -150,10 +150,12 @@
             flex-wrap: wrap;
             gap: 20px;
 
+
             li {
                 position: relative;
                 width: 564px;
                 height: 495px;
+
 
                 img {
                     width: 100%;
@@ -176,6 +178,8 @@
     position: absolute;
     flex-direction: column;
     justify-content: space-between;
+    animation: fadein 1s normal;
+
 
     background: rgba(0, 0, 0, 0.60);
 
