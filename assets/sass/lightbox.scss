@@ -1,0 +1,86 @@
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10;
+    overflow: auto;
+
+    animation: lightboxIn .5s;
+
+    &__close,
+    &__prev,
+    &__next {
+        opacity: .5;
+        transition: opacity .3s;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    &__next,
+    &__prev {
+        width: 100px;
+        height: 100%;
+        position: fixed;
+
+        margin-top: -14px;
+        z-index: 11;
+        color: var(--couleur--blanc);
+    }
+
+    &__next {
+        background: url(./assets/images/right.svg) center center / 27px 16px no-repeat;
+        top: 0;
+        right: 0;
+        text-indent: -80px;
+    }
+
+    &__prev {
+        background: url(./assets/images/left.svg) center center / 27px 16px no-repeat;
+        right: auto;
+        left: 0;
+        text-indent: 70px;
+    }
+
+    &__close {
+        width: 23px;
+        height: 23px;
+        background: url(./assets/images/croix.svg) center center / 23px 23px no-repeat transparent;
+        position: fixed;
+        text-indent: -9999px;
+        top: 54px;
+        right: 51px;
+        z-index: 12;
+    }
+
+    &__container img {
+        max-width: 100%;
+        height: auto;
+
+        animation: lightboxIn .5s;
+    }
+
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 100px;
+        margin-right: 100px;
+        min-height: 100vh;
+    }
+}
+
+@keyframes lightboxIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
