@@ -177,6 +177,13 @@
     letter-spacing: 0.36px;
     text-transform: uppercase;
     cursor: pointer;
+
+    transition: all 0.5s ease-in;
+
+    &:hover {
+
+        border: 1.3px solid #215AFF;
+    }
 }
 
 .selected-option {
@@ -221,4 +228,8 @@
 
 .rotation-180 {
     transform: rotate(180deg);
+}
+
+.rotation-0 {
+    transform: rotate(0deg);
 }

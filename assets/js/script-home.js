@@ -54,14 +54,23 @@ function selectOptionDate(option) {
 }
 
 // RESET Tri
+dropdownCategory.addEventListener("click", function () {
+  arrowCat.classList.toggle("rotation-180")
+})
 catOption.addEventListener("click", function () {
   dropdownDate.style.display = "none"
   dropdownFormat.style.display = "none"
 })
 
+dropdownFormat.addEventListener("click", function () {
+  arrowFormat.classList.toggle("rotation-180")
+})
 formatOption.addEventListener("click", function () {
   dropdownDate.style.display = "none"
   dropdownCategory.style.display = "none"
+})
+dropdownDate.addEventListener("click", function () {
+  arrowDate.classList.toggle("rotation-180")
 })
 dateOption.addEventListener("click", function () {
   dropdownCategory.style.display = "none"
