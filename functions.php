@@ -32,6 +32,7 @@ function nathaliemota_script()
 		wp_enqueue_script('script_home', get_stylesheet_directory_uri() . '/assets/js/script-home.js', ['jquery'], '6.5.2', true);
 	}
 	wp_enqueue_script('mon_script', get_stylesheet_directory_uri() . '/assets/js/script.js', ['jquery'], '6.5.2', true);
+	wp_enqueue_script('lightbox_script', get_stylesheet_directory_uri() . '/assets/js/lightbox.js', ['jquery'], '6.5.2', true);
 	wp_localize_script('mon_script', 'mon_script_js', array('ajax_url' => admin_url('admin-ajax.php')));
 }
 
