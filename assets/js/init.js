@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
       type: "POST",
       data: {
         action: "tri_date",
-        sort: "ASC",
+        sort: "DESC",
         posts_per_page: -1,
       },
       success: function (response) {
