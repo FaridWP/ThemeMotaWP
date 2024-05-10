@@ -22,8 +22,8 @@
                         <a href="<?php the_permalink(); ?>"><img src="<?php echo get_stylesheet_directory_uri() . '/assets/images/Icon_eye.png'; ?>"></a>
                     </div>
                     <div class="overlay__text">
-                        <p class="titre-photo"><?php echo get_field('reference') ?></p>
-                        <p class="titre-photo"><?php echo array_shift(get_the_terms(get_the_ID(), 'categorie'))->name ?></p>
+                        <p class="titre-photo reference"><?php echo get_field('reference') ?></p>
+                        <p class="titre-photo categorie"><?php echo array_shift(get_the_terms(get_the_ID(), 'categorie'))->name ?></p>
                     </div>
                 </div>
                 <a class="overlay__on" href="<?php the_permalink(); ?>">

@@ -56,25 +56,104 @@ function selectOptionDate(option) {
 // RESET Tri
 dropdownCategory.addEventListener("click", function () {
   arrowCat.classList.toggle("rotation-180")
+  formatOption.textContent = "Formats"
+  dateOption.textContent = "Trier par"
+  if (dropdownFormat.style.display !== "none") {
+    dropdownFormat.style.display = "none"
+    arrowFormat.classList.toggle("rotation-180")
+  }
+  if (dropdownDate.style.display !== "none") {
+    dropdownDate.style.display = "none"
+    arrowDate.classList.toggle("rotation-180")
+  }
 })
 catOption.addEventListener("click", function () {
-  dropdownDate.style.display = "none"
-  dropdownFormat.style.display = "none"
+  if (dropdownFormat.style.display !== "none") {
+    dropdownFormat.style.display = "none"
+    arrowFormat.classList.toggle("rotation-180")
+  }
+  if (dropdownDate.style.display !== "none") {
+    dropdownDate.style.display = "none"
+    arrowDate.classList.toggle("rotation-180")
+  }
 })
 
 dropdownFormat.addEventListener("click", function () {
   arrowFormat.classList.toggle("rotation-180")
+  catOption.textContent = "Catégories"
+  dateOption.textContent = "Trier par"
+  if (dropdownCategory.style.display !== "none") {
+    dropdownCategory.style.display = "none"
+    arrowCat.classList.toggle("rotation-180")
+  }
+  if (dropdownDate.style.display !== "none") {
+    dropdownDate.style.display = "none"
+    arrowDate.classList.toggle("rotation-180")
+  }
 })
 formatOption.addEventListener("click", function () {
-  dropdownDate.style.display = "none"
-  dropdownCategory.style.display = "none"
+  if (dropdownCategory.style.display !== "none") {
+    dropdownCategory.style.display = "none"
+    arrowCat.classList.toggle("rotation-180")
+  }
+  if (dropdownDate.style.display !== "none") {
+    dropdownDate.style.display = "none"
+    arrowDate.classList.toggle("rotation-180")
+  }
 })
 dropdownDate.addEventListener("click", function () {
   arrowDate.classList.toggle("rotation-180")
+  catOption.textContent = "Catégories"
+  formatOption.textContent = "Formats"
+  if (dropdownCategory.style.display !== "none") {
+    dropdownCategory.style.display = "none"
+    arrowCat.classList.toggle("rotation-180")
+  }
+  if (dropdownFormat.style.display !== "none") {
+    dropdownFormat.style.display = "none"
+    arrowFormat.classList.toggle("rotation-180")
+  }
 })
 dateOption.addEventListener("click", function () {
-  dropdownCategory.style.display = "none"
-  dropdownFormat.style.display = "none"
+  if (dropdownCategory.style.display !== "none") {
+    dropdownCategory.style.display = "none"
+    arrowCat.classList.toggle("rotation-180")
+  }
+  if (dropdownFormat.style.display !== "none") {
+    dropdownFormat.style.display = "none"
+    arrowFormat.classList.toggle("rotation-180")
+  }
+})
+
+// Fermeture des Tris lorsqu'on clic sur le DOM
+document.addEventListener("click", function (event) {
+  const elementsToAvoid = [
+    ".custom-select",
+    ".selected-option",
+    ".selected-option-format",
+    ".selected-option-date",
+    ".arrow__cat",
+    ".arrow__format",
+    ".arrow__date",
+  ]
+
+  if (!elementsToAvoid.some(selector => event.target.matches(selector))) {
+    if (dropdownCategory.style.display !== "none") {
+      dropdownCategory.style.display = "none"
+      arrowCat.classList.toggle("rotation-180")
+      catOption.textContent = "Catégories"
+    }
+    if (dropdownFormat.style.display !== "none") {
+      dropdownFormat.style.display = "none"
+      arrowFormat.classList.toggle("rotation-180")
+      formatOption.textContent = "Formats"
+    }
+    if (dropdownDate.style.display !== "none") {
+      dropdownDate.style.display = "none"
+      arrowDate.classList.toggle("rotation-180")
+      dateOption.textContent = "Trier par"
+    }
+  }
 })
 
 //AJAX
@@ -193,23 +272,6 @@ function loadMoreDate(sort) {
     type: "POST",
     data: {
       action: "tri_date",
-      sort: sort,
-      posts_per_page: -1,
-    },
-    success: function (response) {
-      $(".container__bottom").html(response)
-      $(".button__home__btn").hide()
-    },
-  })
-}
-
-// Boutou Accueil
-function loadMoreHome(sort) {
-  $.ajax({
-    url: mon_script_js.ajax_url,
-    type: "POST",
-    data: {
-      action: "tri_home",
       sort: sort,
       posts_per_page: -1,
     },

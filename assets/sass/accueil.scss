@@ -16,15 +16,40 @@
                 text-align: center;
                 position: absolute;
                 top: 50%;
-                left: 50%;
+                // left: 50%;
                 transform: translate(-50%, -50%);
 
                 color: transparent;
                 -webkit-text-stroke: 1px white;
                 text-stroke: 1px white;
+
+                animation: float 6s ease-in-out infinite;
             }
 
         }
+    }
+}
+
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0.85);
+    }
+
+    40% {
+        transform: translateY(-5px) rotate(-5deg) scale(0.90);
+    }
+
+    60% {
+        transform: translateY(-5px) rotate(-5deg) scale(0.90);
+    }
+
+    80% {
+        transform: translateY(-5px) rotate(-5deg) scale(0.90);
+    }
+
+    100% {
+        transform: translateY(0) rotate(0deg) scale(0.85);
     }
 }
 
@@ -132,7 +157,6 @@
             padding: 8px 15px;
 
             font-family: "Space Mono";
-            color: #000;
             font-size: 12px;
             font-style: normal;
             font-weight: 400;
@@ -142,12 +166,13 @@
             background: var(--couleur--gris--medium);
 
             box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.02);
-            transition: all 0.2s ease-in-out;
+            transition: all 0.3s ease-in;
 
             cursor: pointer;
 
             &:hover {
-                background: var(--couleur--gris--dark);
+                color: var(--couleur--blanc);
+                background: var(--couleur--bleu--dark);
             }
         }
     }

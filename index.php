@@ -91,44 +91,10 @@
     </div>
 
     <div class="gallery__photos">
-
-        <!-- Affichage de la gallerie par défaut de l'accueil -->
-        <?php
-        $related_posts_args = array(
-            'post_type' => 'photo',
-            'posts_per_page' => 8,
-            'orderby' => 'date',
-            'order' => 'DESC'
-        );
-
-        // Création de la requête
-        $related_posts_query = new WP_Query($related_posts_args);
-        // Création de la variable pour le template part
-        set_query_var('query_photos', $related_posts_query);
-
-
-        // S'il y a des posts semblablent, les afficher
-        if ($related_posts_query->have_posts()) :
-        ?>
-            <section class="container__bottom">
-                <?php echo get_template_part('template-parts/photo', 'block');
-                // Affichage du bouton
-                echo '<div class="button__home">
-            <button class="button__home__btn" data-order="' . $order . '" onclick="loadMoreHome(this.dataset.order)">Charger plus</button>
-        </div>';
-                ?>
-            </section>
-
-        <?php
-            // Reset post data
-            wp_reset_postdata();
-        endif;
-
-        ?>
-
+        <section class="container__bottom">
+            <!-- Affichage de la gallerie ici avec appel AJAX (init.js / script-home.js) -->
+        </section>
     </div>
-
-
 
 </section>
 

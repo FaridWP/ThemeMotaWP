@@ -28,12 +28,17 @@ add_action('wp_enqueue_scripts', 'jqueryCDN');
 add_action('wp_enqueue_scripts', 'nathaliemota_script');
 function nathaliemota_script()
 {
+	wp_enqueue_script('mon_script', get_stylesheet_directory_uri() . '/assets/js/script.js', ['jquery'], '6.5.2', true);
+	wp_enqueue_script('lightbox_script', get_stylesheet_directory_uri() . '/assets/js/lightbox.js', ['jquery'], '0.0.1', true);
+	// Librairie pour bloquer le background lors de l'apparition de la lightbox
+	wp_enqueue_script('body-scroll-lock', get_stylesheet_directory_uri() . '/assets/js/body-scroll-lock.js', ['jquery'], '0.0.1', true);
+	// Script pour AJAX
+	wp_localize_script('mon_script', 'mon_script_js', array('ajax_url' => admin_url('admin-ajax.php')));
+	// Chargement des Scripts seulement sur la page d'accueil
 	if (is_home()) {
 		wp_enqueue_script('script_home', get_stylesheet_directory_uri() . '/assets/js/script-home.js', ['jquery'], '6.5.2', true);
+		wp_enqueue_script('init', get_stylesheet_directory_uri() . '/assets/js/init.js', ['jquery'], '6.5.2', null, true);
 	}
-	wp_enqueue_script('mon_script', get_stylesheet_directory_uri() . '/assets/js/script.js', ['jquery'], '6.5.2', true);
-	wp_enqueue_script('lightbox_script', get_stylesheet_directory_uri() . '/assets/js/lightbox.js', ['jquery'], '6.5.2', true);
-	wp_localize_script('mon_script', 'mon_script_js', array('ajax_url' => admin_url('admin-ajax.php')));
 }
 
 
@@ -137,7 +142,7 @@ function cptui_register_my_cpts_photo()
 add_action('init', 'cptui_register_my_cpts_photo');
 
 
-// Ajax Base
+// Ajax Base EXEMPLE
 function nathaliemota_request_photos()
 {
 	$args = array('post_type' => 'photo', 'post_per_page' => -1);
@@ -159,10 +164,10 @@ add_action('wp_ajax_nopriv_request_photos', 'nathaliemota_request_photos');
 function nathaliemota_tri_categories()
 {
 
-	$order = $_POST['sort'];
+	$term = $_POST['sort'];
 	$args = array(
 		'post_type' => 'photo',
-		'order' => 'ASC',
+		'order' => 'DESC',
 		'posts_per_page' => $_POST['posts_per_page']
 	);
 
@@ -170,7 +175,7 @@ function nathaliemota_tri_categories()
 		array(
 			'taxonomy' => 'categorie',
 			'field'    => 'slug',
-			'terms'    => $order,
+			'terms'    => $term,
 		),
 	);
 
@@ -188,7 +193,7 @@ function nathaliemota_tri_categories()
 		if ($posts->found_posts >= 8) :
 			// Affichage du bouton
 			echo '<div class="button__home">
-            <button class="button__home__btn" data-order="' . $order . '" onclick="loadMoreCat(this.dataset.order)">Charger plus</button>
+            <button class="button__home__btn" data-order="' . $term . '" onclick="loadMoreCat(this.dataset.order)">Charger plus</button>
         </div>';
 		endif;
 
@@ -204,11 +209,11 @@ add_action('wp_ajax_nopriv_tri_categories', 'nathaliemota_tri_categories');
 // Ajax Tri par Format
 function nathaliemota_tri_format()
 {
-	$order = $_POST['sort'];
+	$term = $_POST['sort'];
 
 	$args = array(
 		'post_type' => 'photo',
-		'order' => 'ASC',
+		'order' => 'DESC',
 		'posts_per_page' => $_POST['posts_per_page']
 	);
 
@@ -216,7 +221,7 @@ function nathaliemota_tri_format()
 		array(
 			'taxonomy' => 'format',
 			'field'    => 'slug',
-			'terms'    => $order,
+			'terms'    => $term,
 		),
 	);
 
@@ -234,7 +239,7 @@ function nathaliemota_tri_format()
 		if ($posts->found_posts >= 8) :
 			// Affichage du bouton
 			echo '<div class="button__home">
-            <button class="button__home__btn" data-order="' . $order . '" onclick="loadMoreFormat(this.dataset.order)">Charger plus</button>
+            <button class="button__home__btn" data-order="' . $term . '" onclick="loadMoreFormat(this.dataset.order)">Charger plus</button>
         </div>';
 		endif;
 
@@ -254,7 +259,7 @@ function nathaliemota_tri_date()
 
 	$args = array(
 		'post_type' => 'photo',
-		'order' => $_POST['sort'],
+		'order' => $order,
 		'posts_per_page' => $_POST['posts_per_page']
 	);
 
@@ -293,7 +298,7 @@ function nathaliemota_tri_home()
 
 	$args = array(
 		'post_type' => 'photo',
-		'order' => $_POST['sort'],
+		'order' => $order,
 		'posts_per_page' => $_POST['posts_per_page']
 	);
 
@@ -323,28 +328,3 @@ function nathaliemota_tri_home()
 }
 add_action('wp_ajax_tri_home', 'nathaliemota_tri_home');
 add_action('wp_ajax_nopriv_tri_home', 'nathaliemota_tri_home');
-
-
-// TESTS
-// add_action('wp_enqueue_scripts', 'my_ajax_test_enqueue_scripts');
-// function my_ajax_test_enqueue_scripts()
-// {
-// 	wp_enqueue_script('ajax-test', get_template_directory_uri() . '/assets/js/script.js', array('jquery'), null, true);
-// 	wp_localize_script('ajax-test', 'ajax_test_params', array(
-// 		'ajax_url' => admin_url('admin-ajax.php'),
-// 		'nonce' => wp_create_nonce('ajax-test-nonce')
-// 	));
-// }
-
-// add_action('wp_ajax_my_ajax_test', 'my_ajax_test_callback');
-// add_action('wp_ajax_nopriv_my_ajax_test', 'my_ajax_test_callback');
-
-// function my_ajax_test_callback()
-// {
-// 	check_ajax_referer('ajax-test-nonce', 'security');
-
-// 	// Code de votre test AJAX
-// 	echo "AJAX est reconnu dans WordPress.";
-
-// 	wp_die();
-// }
